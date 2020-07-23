@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VoiceMod</string>
+    <string name="TR_GRABAR_VIDEO">Grabar vídeo</string>
+    <string name="TR_AJUSTES">Ajustes</string>
+    <string name="TR_ATENCION">Atención</string>
+    <string name="TR_ACEPTAR">Aceptar</string>
+    <string name="TR_ES_NECESARIO_ACEPTAR_PERMISOS">Es necesario aceptar los permisos para poder visualizar los vídeos grabados y grabar nuevos</string>
+    <string name="TR_CANCELAR">Cancelar</string>
+    <string name="TR_PERMISO_LEER_ALMACENAMIENTO_NECESARIO">El permiso para leer el almacenamiento del teléfono es necesario para poder visualizar los vídeos de la galería.</string>
+    <string name="TR_PERMISO_CAMARA_ES_NECESARIO">El permiso de la cámara es necesario para poder grabar vídeos.</string>
+</resources>
