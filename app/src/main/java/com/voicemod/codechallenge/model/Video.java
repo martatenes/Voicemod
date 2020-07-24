@@ -1,23 +1,31 @@
 package com.voicemod.codechallenge.model;
 
-public class Video {
+import java.io.File;
+import java.io.Serializable;
 
-    private String thumbnail;
-    private String path;
+public class Video implements Serializable {
 
-    public String getThumbnail() {
-        return thumbnail;
+    File file;
+    boolean isSelected = false;
+
+    public Video(File file) {
+        this.file = file;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+
+    public File getFile() {
+        return file;
     }
 
-    public String getPath() {
-        return path;
+    public void setFile(File file) {
+        this.file = file;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

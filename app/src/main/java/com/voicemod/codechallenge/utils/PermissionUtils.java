@@ -1,6 +1,5 @@
 package com.voicemod.codechallenge.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.widget.Toast;
 
-import com.voicemod.codechallenge.MainActivity;
 import com.voicemod.codechallenge.R;
 
 public class PermissionUtils {
