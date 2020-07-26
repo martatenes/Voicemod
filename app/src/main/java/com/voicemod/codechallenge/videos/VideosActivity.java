@@ -1,11 +1,9 @@
 package com.voicemod.codechallenge.videos;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -30,12 +27,11 @@ import com.voicemod.codechallenge.utils.PermissionUtils;
 import com.voicemod.codechallenge.utils.SharedPrefUtils;
 import com.voicemod.codechallenge.video_detail.VideoDetailActivity;
 
-import java.io.File;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View{
+public class VideosActivity extends AppCompatActivity implements VideosContract.View{
 
-    MainPresenter mPresenter;
+    VideosPresenter mPresenter;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager recyclerViewLayoutManager;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onStart() {
         super.onStart();
         if (mPresenter == null){
-            mPresenter = new MainPresenter(this);
+            mPresenter = new VideosPresenter(this);
         }
         mPresenter.retrieveVideos();
     }
@@ -114,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         switch (item.getItemId()) {
             case R.id.record:
 
-                if (!PermissionUtils.hasPermission(MainActivity.this, Manifest.permission.CAMERA)) {
+                if (!PermissionUtils.hasPermission(VideosActivity.this, Manifest.permission.CAMERA)) {
                     PermissionUtils.managePermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.CAMERA}, Constants.REQUEST_CAMERA_CODE);
                 }
                 else {

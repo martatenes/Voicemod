@@ -7,7 +7,7 @@ import com.voicemod.codechallenge.model.Video;
 
 import java.util.List;
 
-public class MainContract {
+public class VideosContract {
 
     public interface View{
         void showProgress();

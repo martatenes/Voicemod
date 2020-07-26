@@ -7,17 +7,16 @@ import com.voicemod.codechallenge.App;
 import com.voicemod.codechallenge.R;
 import com.voicemod.codechallenge.model.Video;
 
-import java.io.File;
 import java.util.List;
 
-public  class MainPresenter implements MainContract.Presenter,  MainContract.Model.onSaveVideoListener, MainContract.Model.onRetrieveVideosListener, MainContract.Model.onCameraListener {
+public  class VideosPresenter implements VideosContract.Presenter,  VideosContract.Model.onSaveVideoListener, VideosContract.Model.onRetrieveVideosListener, VideosContract.Model.onCameraListener {
 
-    private MainContract.View mainView;
-    private MainContract.Model mainModel;
+    private VideosContract.View mainView;
+    private VideosContract.Model mainModel;
 
-    public MainPresenter(MainContract.View view){
+    public VideosPresenter(VideosContract.View view){
         mainView = view;
-        mainModel = new MainModel();
+        mainModel = new VideosModel();
     }
 
     @Override

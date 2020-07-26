@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.voicemod.codechallenge.App;
-import com.voicemod.codechallenge.constants.Constants;
 import com.voicemod.codechallenge.model.Video;
 import com.voicemod.codechallenge.utils.SharedPrefUtils;
 
@@ -20,7 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class MainModel implements MainContract.Model {
+public class VideosModel implements VideosContract.Model {
 
     private final String TAG = "MainModel";
 
