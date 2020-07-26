@@ -76,7 +76,7 @@ public class PermissionUtils {
             // Pedimos el permiso para poder visualizar los vídeos desde la galería
             if (shouldShowRational((Activity) context, permission)){
                 // En el caso de que ya hayamos pedido previamente este permiso y el usuario lo haya denegado
-                AlertUtils.ShowAlertWithCallback((Activity) context, message, new AlertUtils.AlertCallback() {
+                AlertUtils.ShowAlertWithCallback((Activity) context, message, new AlertUtils.AlertAcceptCancelCallback() {
                     @Override
                     public void onClickAccept() {
                         requestPermissions((Activity) context, new String[]{permission}, requestCode);
@@ -100,16 +100,13 @@ public class PermissionUtils {
 
         if (shouldShowRational((Activity) context, permission)){
             // En el caso de que ya hayamos pedido previamente este permiso y el usuario lo haya denegado
-            AlertUtils.ShowAlertWithCallback((Activity) context, context.getString(R.string.TR_ES_NECESARIO_ACEPTAR_PERMISOS), new AlertUtils.AlertCallback() {
+            AlertUtils.ShowAlertWithCallback((Activity) context, context.getString(R.string.TR_ES_NECESARIO_ACEPTAR_PERMISOS), new AlertUtils.AlertAcceptCallback() {
                 @Override
                 public void onClickAccept() {
                     requestPermissions((Activity) context, new String[]{permission}, REQUEST_CODE);
                 }
 
-                @Override
-                public void onClickCancel() {
-                    Toast.makeText((Activity) context, context.getString(R.string.TR_ES_NECESARIO_ACEPTAR_PERMISOS), Toast.LENGTH_LONG).show();
-                }
+
             });
         }else{ // Pedimos el permiso
             requestPermissions((Activity) context, new String[]{permission}, REQUEST_CODE);

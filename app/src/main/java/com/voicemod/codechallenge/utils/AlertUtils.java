@@ -8,9 +8,13 @@ import com.voicemod.codechallenge.R;
 
 public class AlertUtils {
 
-    public interface AlertCallback{
+    public interface AlertAcceptCancelCallback{
         void onClickAccept();
         void onClickCancel();
+    }
+
+    public interface AlertAcceptCallback{
+        void onClickAccept();
     }
 
     public static void ShowSimpleAlert(Context context, String message) {
@@ -22,22 +26,28 @@ public class AlertUtils {
     }
 
 
-    public static void ShowAlertWithCallback(Context context, String message, AlertCallback callback) {
+    public static void ShowAlertWithCallback(Context context, String message, AlertAcceptCallback callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message);
-        builder.setPositiveButton(R.string.TR_ACEPTAR, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                callback.onClickAccept();
-            }
+        builder.setPositiveButton(R.string.TR_ACEPTAR, (dialogInterface, i) -> {
+            callback.onClickAccept();
+            dialogInterface.dismiss();
         });
-        builder.setNegativeButton(R.string.TR_CANCELAR, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                callback.onClickCancel();
-            }
+        builder.setNegativeButton(R.string.TR_CANCELAR, (dialogInterface, i) -> dialogInterface.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public static void ShowAlertWithCallback(Context context, String message, AlertAcceptCancelCallback callback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setPositiveButton(R.string.TR_ACEPTAR, (dialogInterface, i) -> {
+            callback.onClickAccept();
+            dialogInterface.dismiss();
+        });
+        builder.setNegativeButton(R.string.TR_CANCELAR, (dialogInterface, i) -> {
+            //callback.onClickCancel();
+            dialogInterface.dismiss();
         });
         AlertDialog dialog = builder.create();
         dialog.show();

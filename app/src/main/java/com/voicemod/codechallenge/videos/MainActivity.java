@@ -24,8 +24,10 @@ import com.voicemod.codechallenge.R;
 import com.voicemod.codechallenge.adapters.VideoAdapter;
 import com.voicemod.codechallenge.constants.Constants;
 import com.voicemod.codechallenge.model.Video;
+import com.voicemod.codechallenge.settings.SettingsActivity;
 import com.voicemod.codechallenge.utils.AlertUtils;
 import com.voicemod.codechallenge.utils.PermissionUtils;
+import com.voicemod.codechallenge.utils.SharedPrefUtils;
 import com.voicemod.codechallenge.video_detail.VideoDetailActivity;
 
 import java.io.File;
@@ -41,37 +43,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     ProgressBar progressBar;
     TextView tvEmpty;
     String fileName;
-    Menu context_menu;
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            // Inflate a menu resource providing context menu items
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.menu_video_detail, menu);
-            context_menu = menu;
-            return true;
-        }
 
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false; // Return false if nothing is done
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (SharedPrefUtils.isFirstRun(this)){
+            SharedPrefUtils.setDefaultPreferences(this);
+        }
         initUI();
         setUpListeners();
     }
@@ -81,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onStart();
         if (mPresenter == null){
             mPresenter = new MainPresenter(this);
-            mPresenter.retrieveVideos();
         }
+        mPresenter.retrieveVideos();
     }
 
     @Override
@@ -98,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private void initUI() {
         tvEmpty = findViewById(R.id.tvEmpty);
         progressBar = findViewById(R.id.progressBar);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        recyclerView = (RecyclerView) findViewById(R.id.rvVideos);
+        swipeRefreshLayout =  findViewById(R.id.swipeRefresh);
+        recyclerView = findViewById(R.id.rvVideos);
         recyclerViewLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
         mAdapter = new VideoAdapter(this, this::onClickVideo);
@@ -125,16 +106,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         return true;
     }
 
-    private void launchCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        fileName = System.currentTimeMillis() + ".mp4";
-        File path = new File(getFilesDir(), "VoiceMod");
-        File filePath = new File(path + "/" + fileName);
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Video.Media.TITLE, fileName);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, filePath);
-        startActivityForResult(intent, Constants.VIDEO_CAPTURE);
-    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -145,13 +118,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                     PermissionUtils.managePermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.CAMERA}, Constants.REQUEST_CAMERA_CODE);
                 }
                 else {
-                    launchCamera();
+                    fileName = System.currentTimeMillis() + ".mp4";
+                    mPresenter.prepareCamera(fileName);
                 }
 
                 break;
 
             case R.id.settings:
-                //TODO: Lanzar activity de ajustes
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -165,7 +140,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == Constants.REQUEST_CAMERA_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                launchCamera();
+                fileName = System.currentTimeMillis() + ".mp4";
+                mPresenter.prepareCamera(fileName);
             }
         }
 
@@ -189,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -201,7 +178,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void refreshVideos(List<Video> videos) {
         tvEmpty.setVisibility(videos.size() > 0 ? View.GONE : View.VISIBLE);
         mAdapter.updateData(videos);
-        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void launchCamera(Intent intent) {
+        startActivityForResult(intent, Constants.VIDEO_CAPTURE);
     }
 }
 

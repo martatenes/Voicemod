@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <androidx.preference.SwitchPreference
+        android:defaultValue="true"
+        android:key="swQuality"
+        android:summary="@string/TR_GRABA_LOS_VIDEOS_CALIDAD_ALTA"
+        android:title="@string/TR_ALTA_CALIDAD" />
+
+    <androidx.preference.SwitchPreference
+        android:defaultValue="false"
+        android:key="swDuration"
+        android:summary="@string/TR_QUIERES_LIMITAR_DURACION_VIDEO"
+        android:title="@string/TR_LIMITE_DURACION" />
+
+    <androidx.preference.SeekBarPreference
+        android:key="sbDuration"
+        android:max="60"
+        android:min="1"
+        app:min="1"
+        android:summary="@string/TR_UN_MINUTO"
+        android:title="@string/TR_DURACION_VIDEO"  />
+
+    <androidx.preference.SwitchPreference
+        android:defaultValue="false"
+        android:key="swSize"
+        android:summary="@string/TR_QUIERES_LIMITAR_TAMANYO_VIDEO"
+        android:title="@string/TR_LIMITE_TAMANYO" />
+
+    <androidx.preference.SeekBarPreference
+        android:key="sbSize"
+        android:summary="@string/TR_UN_MEGABYTE"
+        android:max="200"
+        android:min="1"
+        app:min="1"
+        android:title="@string/TR_TAMANYO_VIDEO"  />
+
+</PreferenceScreen>

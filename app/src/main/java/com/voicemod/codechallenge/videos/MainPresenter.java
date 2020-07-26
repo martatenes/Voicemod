@@ -1,5 +1,6 @@
 package com.voicemod.codechallenge.videos;
 
+import android.content.Intent;
 import android.net.Uri;
 
 import com.voicemod.codechallenge.App;
@@ -9,7 +10,7 @@ import com.voicemod.codechallenge.model.Video;
 import java.io.File;
 import java.util.List;
 
-public class MainPresenter implements MainContract.Presenter,  MainContract.Model.onSaveVideoListener, MainContract.Model.onRetrieveVideosListener {
+public  class MainPresenter implements MainContract.Presenter,  MainContract.Model.onSaveVideoListener, MainContract.Model.onRetrieveVideosListener, MainContract.Model.onCameraListener {
 
     private MainContract.View mainView;
     private MainContract.Model mainModel;
@@ -51,7 +52,10 @@ public class MainPresenter implements MainContract.Presenter,  MainContract.Mode
         mainModel.saveVideo(uri, fileName, this);
     }
 
-
+    @Override
+    public void prepareCamera(String filename) {
+        mainModel.onPrepareCameraIntent(filename, this);
+    }
 
 
     @Override
@@ -75,6 +79,13 @@ public class MainPresenter implements MainContract.Presenter,  MainContract.Mode
         if (mainView != null) {
             mainView.hideProgress();
             mainView.showError(App.getContext().getString(R.string.TR_OCURRIO_UN_ERROR_GUARDANDO_VIDEO));
+        }
+    }
+
+    @Override
+    public void onCameraIsPrepared(Intent intent) {
+        if (mainView != null){
+            mainView.launchCamera(intent);
         }
     }
 }

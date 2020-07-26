@@ -21,4 +21,19 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="TR_ESTAS_SEGURO_ELIMINAR_VIDEO">Vas a eliminar este vídeo. Esta acción no se puede deshacer. ¿Estás seguro?</string>
+    <string name="TR_NO_SE_PUDO_ELIMINAR">No fue posible eliminar el vídeo. Vuélvelo a intentar.</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="TR_TAMANYO_VIDEO">Tamaño del vídeo</string>
+    <string name="TR_QUIERES_LIMITAR_TAMANYO_VIDEO">¿Quieres limintar el tamaño del vídeo?</string>
+    <string name="TR_LIMITE_TAMANYO">Límite de tamaño</string>
+    <string name="TR_DURACION_VIDEO">Duración del vídeo</string>
+    <string name="TR_LIMITE_DURACION">Límite de duración</string>
+    <string name="TR_QUIERES_LIMITAR_DURACION_VIDEO">¿Quieres limintar la duración del vídeo?</string>
+    <string name="TR_GRABA_LOS_VIDEOS_CALIDAD_ALTA">Graba los vídeos con calidad alta</string>
+    <string name="TR_ALTA_CALIDAD">Alta calidad</string>
+    <string name="TR_UN_MINUTO">1 Minuto</string>
+    <string name="TR_UN_MEGABYTE">1 Megabyte</string>
+    <string name="TR_PLACEHOLDER_MINUTOS">%d minutos</string>
+    <string name="TR_PLACEHOLDER_MEGABYTES">%d megabytes</string>
 </resources>

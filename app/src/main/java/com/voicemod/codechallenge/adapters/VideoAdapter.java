@@ -53,7 +53,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         VideoViewHolder videoHolder = (VideoViewHolder) holder;
         if (mVideoList.get(position) != null) {
             Video video = mVideoList.get(position);
-            Glide.with(mContext).load("Video://" + video.getFile().getAbsolutePath())
+            Glide.with(mContext).load(video.getFile().getAbsolutePath())
                     .skipMemoryCache(true)
                     .into(videoHolder.ivThumbnail);
 
