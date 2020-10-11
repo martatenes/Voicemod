@@ -1,5 +1,5 @@
-# Voicemod
 
+Descripción de la prueba.
 Desarrollar una grabadora de vídeo para Android usando Kotlin con las siguientes
 características:
 Los vídeos capturados serán guardados en el dispositivo y a través de un listado se podrá
@@ -9,3 +9,7 @@ interfaz además de poder añadir otras funcionalidades no especificadas en este
 Se valora positivamente el utilizar una estructura correcta en el proyecto, el uso de
 bibliotecas Android Jetpack, la realización de tests y el empleo de frameworks de inyección
 de dependencias.
+Contenido entregable.
+- Código.
+- Documentación (Readme.txt o similar) donde puedes expresar las opciones de
+diseño que hayas tomado
